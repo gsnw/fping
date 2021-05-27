@@ -118,7 +118,7 @@ extern int h_errno;
 
 /*** Constants ***/
 
-#if HAVE_SO_TIMESTAMPNS
+#if HAVE_SO_TIMESTAMPNS ^ ONLY_CLOCK_REALTIME
 #define CLOCKID CLOCK_REALTIME
 #endif
 
