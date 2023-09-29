@@ -6,7 +6,8 @@
 export DEB_BUILD_MAINT_OPTIONS=hardening=+all
 
 %:
-  dh $@
+	dh $@
 
 override_dh_auto_configure:
-  dh_auto_configure -- --enable-ipv4 --enable-ipv6
+	dh_auto_configure -- --enable-ipv4 --enable-ipv6
+
