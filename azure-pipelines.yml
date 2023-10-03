@@ -24,3 +24,28 @@ jobs:
      prove ci/test-15*.pl
      ci/test-tarball.sh
     displayName: 'build_test'
+
+- job: binary-i686
+  displayName: Linux fping Binary i686
+
+  pool:
+    name: Azure Pipelines
+  steps:
+  - script: |
+    sudo apt-get update -qq
+    sudo apt-get install libcap2-bin libtest-command-perl
+    sudo apt-get install python3-dev gcc-12-i686-linux-gnu g++-12-i686-linux-gnu
+   displayName: 'before_install'
+
+  - script: |
+     export CC=i686-linux-gnu-gcc-12
+     export CXX=i686-linux-gnu-g++-12
+     autoreconf -i
+     ./configure --prefix=$(Build.ArtifactStagingDirectory)/
+     make
+     make install
+   
+   displayName: 'Build Binary i686'
+
+  - task: PublishBuildArtifacts@1
+    displayName: 'Publish Artifact: drop'
