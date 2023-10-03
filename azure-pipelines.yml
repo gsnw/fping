@@ -48,4 +48,6 @@ jobs:
     displayName: 'Build Binary i686'
 
   - task: PublishBuildArtifacts@1
-    displayName: 'Publish Artifact: drop'
+    displayName: 'Publish Artifact: binary-i686'
+    inputs:
+      ArtifactName: 'binary-i686'
