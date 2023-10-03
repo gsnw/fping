@@ -32,9 +32,9 @@ jobs:
     name: Azure Pipelines
   steps:
   - script: |
-    sudo apt-get update -qq
-    sudo apt-get install libcap2-bin libtest-command-perl
-    sudo apt-get install python3-dev gcc-12-i686-linux-gnu g++-12-i686-linux-gnu
+     sudo apt-get update -qq
+     sudo apt-get install libcap2-bin libtest-command-perl
+     sudo apt-get install python3-dev gcc-12-i686-linux-gnu g++-12-i686-linux-gnu
    displayName: 'before_install'
 
   - script: |
