@@ -35,7 +35,7 @@ jobs:
      sudo apt-get update -qq
      sudo apt-get install libcap2-bin libtest-command-perl
      sudo apt-get install python3-dev gcc-12-i686-linux-gnu g++-12-i686-linux-gnu
-   displayName: 'before_install'
+    displayName: 'before_install'
 
   - script: |
      export CC=i686-linux-gnu-gcc-12
@@ -45,7 +45,7 @@ jobs:
      make
      make install
    
-   displayName: 'Build Binary i686'
+    displayName: 'Build Binary i686'
 
   - task: PublishBuildArtifacts@1
     displayName: 'Publish Artifact: drop'
