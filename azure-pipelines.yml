@@ -25,7 +25,7 @@ jobs:
      ci/test-tarball.sh
     displayName: 'build_test'
 
-- job: binary-i686
+- job: binary_i686
   displayName: Linux fping Binary i686
 
   pool:
