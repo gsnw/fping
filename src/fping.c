@@ -64,6 +64,10 @@ extern "C" {
 #include <sys/time.h>
 #include <sys/types.h>
 
+#ifdef __linux__
+#include <linux/net_tstamp.h>
+#endif
+
 #if HAVE_SYS_FILE_H
 #include <sys/file.h>
 #endif /* HAVE_SYS_FILE_H */
@@ -994,20 +998,16 @@ int main(int argc, char **argv)
 
 #if HAVE_SO_TIMESTAMPNS
     {
-        int opt = 1;
+        int opt = SOF_TIMESTAMPING_SOFTWARE | SOF_TIMESTAMPING_RX_SOFTWARE | SOF_TIMESTAMPING_RAW_HARDWARE;
         if (socket4 >= 0) {
-            if (setsockopt(socket4, SOL_SOCKET, SO_TIMESTAMPNS, &opt, sizeof(opt))) {
-                if (setsockopt(socket4, SOL_SOCKET, SO_TIMESTAMP, &opt, sizeof(opt))) {
-                    perror("setting SO_TIMESTAMPNS and SO_TIMESTAMP option");
-                }
+            if (setsockopt(socket4, SOL_SOCKET, SO_TIMESTAMPING, &opt, sizeof(opt))) {
+                perror("setting SO_TIMESTAMPING option");
             }
         }
 #ifdef IPV6
         if (socket6 >= 0) {
-            if (setsockopt(socket6, SOL_SOCKET, SO_TIMESTAMPNS, &opt, sizeof(opt))) {
-                if (setsockopt(socket6, SOL_SOCKET, SO_TIMESTAMP, &opt, sizeof(opt))) {
-                    perror("setting SO_TIMESTAMPNS and SO_TIMESTAMP option (IPv6)");
-                }
+            if (setsockopt(socket6, SOL_SOCKET, SO_TIMESTAMPING, &opt, sizeof(opt))) {
+                perror("setting SO_TIMESTAMPING option (IPv6)");
             }
         }
 #endif
