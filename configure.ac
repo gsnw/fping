@@ -104,6 +104,25 @@ AC_ARG_ENABLE([debug],
 AS_IF([test "x$enable_debug" = "xyes"], [
   AC_DEFINE([DEBUG], [1], [Define if debugging is enabled])])
 
+dnl --enable-ncurses: build the fping-tui ncurses frontend
+AC_ARG_ENABLE([ncurses],
+  AS_HELP_STRING([--enable-ncurses], [Build fping-tui, the ncurses-based TUI frontend for fping]))
+AS_IF([test "x$enable_ncurses" = "xyes"], [
+  dnl Check for ncursesw header
+  AC_CHECK_HEADERS([ncursesw/ncurses.h], [have_ncurses_h="yes"], [have_ncurses_h="no"])
+  AS_IF([test "x$have_ncurses_h" != "xyes"], [
+    AC_MSG_ERROR([--enable-ncurses requires ncursesw/ncurses.h (install libncursesw5-dev or ncurses-devel)])
+  ])
+  dnl Check for -lncursesw
+  AC_CHECK_LIB([ncursesw], [initscr], [have_ncurses_lib="yes"], [have_ncurses_lib="no"])
+  AS_IF([test "x$have_ncurses_lib" != "xyes"], [
+    AC_MSG_ERROR([--enable-ncurses requires libncursesw (install libncursesw5-dev or ncurses-devel)])
+  ])
+  NCURSES_LIBS="-lncursesw -lm"
+  AC_SUBST([NCURSES_LIBS])
+])
+AM_CONDITIONAL([ENABLE_NCURSES], [test "x$enable_ncurses" = "xyes"])
+
 AM_INIT_AUTOMAKE([-Wall -Werror foreign])
 AM_MAINTAINER_MODE
 

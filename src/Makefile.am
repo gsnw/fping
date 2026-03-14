@@ -9,3 +9,10 @@ if IPV6
 fping_SOURCES += socket6.c
 fping_CFLAGS = $(AM_CFLAGS) -DIPV6
 endif
+
+if ENABLE_NCURSES
+sbin_PROGRAMS += fping-tui
+fping_tui_SOURCES = fping-tui.c
+fping_tui_CFLAGS  = $(AM_CFLAGS) -DNCURSES_WIDECHAR
+fping_tui_LDADD   = $(NCURSES_LIBS)
+endif
