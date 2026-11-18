@@ -22,6 +22,7 @@ workflows:
         - 'vmactions/freebsd-vm@v1.5.9'
         - 'vmactions/omnios-vm@v1.3.8'
         - 'vmactions/openbsd-vm@v1.4.9'
+        - 'vmactions/hurd-vm@v1.0.2'
     '.github/workflows/test-s390x.yml':
         - 'actions/checkout@v7.0.1'
         - 'vmactions/ubuntu-vm@v1.0.2'
@@ -108,3 +109,8 @@ dependencies:
         commit: 'sha1-3b554fb5d71472e2d3829d9a11160de0d91f463b'
         owner_id: 71690866
         repo_id: 1334770931
+    'vmactions/hurd-vm@v1.0.2':
+        ref: 'v1.0.2'
+        commit: 'sha1-430b769cb10d4019d62abb78fa4c48d29ef51765'
+        owner_id: 71690866
+        repo_id: 1308720274
